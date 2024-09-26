@@ -25,10 +25,10 @@ public class Reralopes extends Raza{
 	}
 
 	@Override
-	public boolean recibirDano(int dano) {
+	public float recibirDano(float dano) {
 		multiplicadorDaño = 1;
-		vida -= dano;
-		return vida<=0;
+		
+		return super.recibirDano(dano);
 	}
 
 	@Override

@@ -25,10 +25,11 @@ public class Wrives extends Raza{
 	}
 
 	@Override
-	public boolean recibirDano(int dano) {
+	public float recibirDano(float dano) {
 		quiereAtacar = true;
-		vida -= dano*2;
-		return vida<=0;
+		float danoAplicado = dano*2;
+		
+		return super.recibirDano(danoAplicado);
 	}
 
 	@Override
