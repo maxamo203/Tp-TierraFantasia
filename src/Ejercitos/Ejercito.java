@@ -5,7 +5,8 @@ import java.util.List;
 
 public class Ejercito implements Atacante{
 	protected List<Atacante> tropas;
-	protected int danoRestante;
+	protected float vida = 0;
+	protected float danoRestante;
 	public Ejercito(String nombre, int cantidad) {
 		tropas = new ArrayList<Atacante>();
 		try {
@@ -17,7 +18,9 @@ public class Ejercito implements Atacante{
 	}
 	public void agregarTropas(String nombre, int cantidad) throws Exception {
 		for(int i = 0;i<cantidad;i++) {
-			tropas.add(Raza.crear(nombre));
+			Raza tropa = Raza.crear(nombre);
+			tropas.add(tropa);
+			vida += tropa.getVida();
 		}
 	}
 	@Override
@@ -30,21 +33,23 @@ public class Ejercito implements Atacante{
 	}
 
 	@Override
-	public boolean recibirDano(int dano) {
+	public float recibirDano(float dano) {
 		// TODO Auto-generated method stub
 		int indice = tropas.size()-1;
+		float vidaActual = vida;
 		while(dano > 0 && indice >= 0) {
 			Atacante actual = tropas.get(indice);
 			int danoAplicado = (int)Math.min(dano, actual.getVida());
-			actual.recibirDano(danoAplicado);
+			vida -= actual.recibirDano(danoAplicado);
 			if(actual.getVida()<=0) {
 				tropas.remove(indice);
 				indice--;
-				dano -= danoAplicado;
-			}
+			}	
+			
+			dano -= danoAplicado;
 		}
 		danoRestante = dano;
-		return indice<=0;
+		return vidaActual-vida;
 		
 	}
 
@@ -56,13 +61,8 @@ public class Ejercito implements Atacante{
 		}
 	}
 	@Override
-	public float getVida() { //me interesa saber si hay algun soldado con vida, no la vida total de todos
-		for(Atacante a: tropas) {
-			if(a.getVida()>0) {
-				return a.getVida();
-			}
-		}
-		return 0;
+	public float getVida() { 
+		return vida;
 	}
 	
 	@Override

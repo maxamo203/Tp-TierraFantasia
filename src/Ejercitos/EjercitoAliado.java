@@ -30,21 +30,21 @@ public class EjercitoAliado extends Ejercito {
 	}
 	
 	@Override
-	public boolean recibirDano(int dano) {
-		// TODO Auto-generated method stub
+	public float recibirDano(float dano) {
 		super.recibirDano(dano);
 		int indice = tropasAliadas.size()-1;
+		float vidaActual = vida;
 		while(danoRestante > 0 && indice >= 0) {
 			Atacante actual = tropasAliadas.get(indice);
 			int danoAplicado = (int)Math.min(dano, actual.getVida());
-			actual.recibirDano(danoAplicado);
+			vida -= actual.recibirDano(danoAplicado);
 			if(actual.getVida()<=0) {
 				tropasAliadas.remove(indice);
 				indice--;
 				dano -= danoAplicado;
 			}
 		}
-		return indice<=0;
+		return vidaActual-vida;
 	}
 	
 	@Override

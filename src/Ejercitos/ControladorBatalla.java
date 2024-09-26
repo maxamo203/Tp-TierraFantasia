@@ -9,12 +9,15 @@ public class ControladorBatalla {
 	}
 	public Ejercito disputarBatalla() {
 		 while(eAliado.getVida()>0 && eEnemigo.getVida()>0) {
+			 int dano;
 			 if(vaEjercitoAliado) {
-				 int dano = eAliado.atacar();
+				 dano = eAliado.atacar();
 				 eEnemigo.recibirDano(dano);
+				 System.out.println(eAliado.getClass() +" "+ dano);
 			 }else {
-				 int dano = eEnemigo.atacar();
+				 dano = eEnemigo.atacar();
 				 eAliado.recibirDano(dano);
+				 System.out.println(eEnemigo.getClass() +" "+ dano);
 			 }
 			 vaEjercitoAliado = !vaEjercitoAliado;
 		 }
