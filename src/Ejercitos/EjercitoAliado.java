@@ -3,10 +3,16 @@ package Ejercitos;
 import java.util.ArrayList;
 import java.util.List;
 
+import mapa.Pueblo;
+
 public class EjercitoAliado extends Ejercito {
 	protected List<Atacante> tropasAliadas;
+	private String razaInicial;
+	private int cantidadInicial;
 	public EjercitoAliado(String nombre, int cantidad) {
 		super(nombre, 0);
+		razaInicial = nombre;
+		cantidadInicial = cantidad;
 		tropasAliadas = new ArrayList<Atacante>();
 		try {
 			agregarTropasAliadas(nombre, cantidad);
@@ -71,5 +77,13 @@ public class EjercitoAliado extends Ejercito {
 	@Override
 	public String toString() {
 		return "EJERCITO ALIADO";
+	}
+	
+	public Pueblo viajar(int indicePueblo) {
+		//TODO
+		return null;
+	}
+	public void generarInforme() {
+		//TODO
 	}
 }
