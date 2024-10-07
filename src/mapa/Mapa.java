@@ -1,10 +1,12 @@
 package mapa;
 
-import java.util.LinkedList;
+import java.util.Stack;
 
 public class Mapa {
 	private static Mapa instance = null;
 	private Pueblo[] pueblos;
+	private Grafo grafo;
+	private int puebloInicial, puebloFinal;
 	private Mapa() {
 		
 	}
@@ -17,8 +19,8 @@ public class Mapa {
 	public void cargarMapa(Pueblo[] pueblos, float[][] distancias, int posPuebloDestino) {
 		//TODO
 	}
-	public LinkedList<Integer> calcularDijkstra(){
-		//TODO
-		return null;
+	public Stack<Integer> calcularDijkstra(){
+		Camino camino = grafo.calcularDistancias(puebloInicial);
+		return camino.caminoEnPila(puebloFinal, puebloInicial);
 	}
 }
