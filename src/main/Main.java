@@ -1,6 +1,7 @@
 package main;
 
 import java.util.Queue;
+import java.util.Stack;
 
 import Ejercitos.ControladorBatalla;
 import Ejercitos.Ejercito;
@@ -32,9 +33,9 @@ public class Main {
 		 */
 		Mapa mapa = Mapa.getInstance();
 		EjercitoAliado miejercito = LectorArchivo.leer("ruta/al/archivo");
-		Queue<Integer> listaPueblosCercanos = mapa.calcularDijkstra();
+		Stack<Integer> listaPueblosCercanos = mapa.calcularDijkstra();
 		while(!listaPueblosCercanos.isEmpty() && miejercito.getVida() > 0) {
-			int proximoPueblo = listaPueblosCercanos.poll();
+			int proximoPueblo = listaPueblosCercanos.pop();
 			Pueblo puebloDestino = miejercito.viajar(proximoPueblo);
 			puebloDestino.interactuar(miejercito);
 		}
