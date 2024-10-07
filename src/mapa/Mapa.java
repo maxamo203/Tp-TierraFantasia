@@ -6,7 +6,7 @@ public class Mapa {
 	private static Mapa instance = null;
 	private Pueblo[] pueblos;
 	private Grafo grafo;
-	private int puebloInicial, puebloFinal;
+	private int posPuebloInicial, posPuebloDestino;
 	private Mapa() {
 		
 	}
@@ -16,11 +16,18 @@ public class Mapa {
 		}
 		return instance;
 	}
-	public void cargarMapa(Pueblo[] pueblos, float[][] distancias, int posPuebloDestino) {
-		//TODO
+	public void cargarMapa(Pueblo[] pueblos, double [][] distancias, int posPuebloDestino, int posPuebloInicial) throws Exception {
+		this.pueblos = pueblos;	
+		this.grafo = new Grafo(distancias);
+		this.posPuebloInicial = posPuebloInicial;
+		this.posPuebloDestino = posPuebloDestino;
 	}
-	public Stack<Integer> calcularDijkstra(){
-		Camino camino = grafo.calcularDistancias(puebloInicial);
-		return camino.caminoEnPila(puebloFinal, puebloInicial);
+	
+	
+	public Stack<Integer> obtenerCaminoCorto(){
+		grafo.sumarCosto(10);
+		Camino camino = grafo.caminoCortoDijkstra(posPuebloDestino);
+		grafo.sumarCosto(-10);
+		return camino.caminoEnPila(posPuebloDestino, posPuebloDestino);
 	}
 }

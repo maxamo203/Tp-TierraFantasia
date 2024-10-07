@@ -13,5 +13,9 @@ public class PuebloEnemigo extends Pueblo {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public String toString() {
+		return "Ejercito enemigo raza: " + raza + " habitantes: " + habitantes;
+	}
 
 }

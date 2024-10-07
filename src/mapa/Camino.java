@@ -6,13 +6,13 @@ import java.util.Stack;
 
 public class Camino {
 	private int [] caminos;
-	private int [] costos;
+	private double [] costos;
 	private final int cantNodos;
 	
 	public Camino(int cantNodos) {
 		this.cantNodos = cantNodos;
 		caminos = new int[cantNodos];
-		costos = new int[cantNodos];
+		costos = new double[cantNodos];
 		Arrays.fill(costos, -1);
 	}
 	
@@ -36,16 +36,16 @@ public class Camino {
 		return pila;
 	}
 	
-	public void setCamino(int nodoDestino, int nodoPartida, int costo) {
+	public void setCamino(int nodoDestino, int nodoPartida, double costo) {
 		caminos[nodoDestino] = nodoPartida;
 		costos[nodoDestino] = costo;
 	}
 	
-	public void setCosto(int nodoDestino, int costo) {
+	public void setCosto(int nodoDestino, double costo) {
 		costos[nodoDestino] = costo;
 	}
 	
-	public int getCosto(int nodoDestino) {
+	public double getCosto(int nodoDestino) {
 		return costos[nodoDestino];
 	}
 	

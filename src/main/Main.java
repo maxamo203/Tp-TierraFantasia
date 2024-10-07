@@ -32,8 +32,14 @@ public class Main {
 		 ....por ahora, decimos que no hay camino posible
 		 */
 		Mapa mapa = Mapa.getInstance();
-		EjercitoAliado miejercito = LectorArchivo.leer("ruta/al/archivo");
-		Stack<Integer> listaPueblosCercanos = mapa.calcularDijkstra();
+		LectorArchivo.leerArchivo("input.txt");
+		try {
+			mapa.cargarMapa(LectorArchivo.pueblos, LectorArchivo.matrizAdyacencia, LectorArchivo.posPuebloFinal, LectorArchivo.posPuebloInicial);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		EjercitoAliado miejercito = LectorArchivo.ejercitoPropio;
+		Stack<Integer> listaPueblosCercanos = mapa.obtenerCaminoCorto();
 		while(!listaPueblosCercanos.isEmpty() && miejercito.getVida() > 0) {
 			int proximoPueblo = listaPueblosCercanos.pop();
 			Pueblo puebloDestino = miejercito.viajar(proximoPueblo);
