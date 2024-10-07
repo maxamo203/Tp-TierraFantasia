@@ -3,11 +3,11 @@ package mapa;
 import java.util.Arrays;
 
 public class Grafo {
-	private int [][] matrizAdyacencia;
+	private double [][] matrizAdyacencia;
 	private int cantNodos;
 	private boolean[] visitado;
 
-	public Grafo(int[][] matrizAdyacencia) throws Exception {
+	public Grafo(double[][] matrizAdyacencia) throws Exception {
 		if (matrizAdyacencia.length == 0) {
 			throw new Exception("Se ingresó una matriz vacía");
 		}
@@ -19,7 +19,7 @@ public class Grafo {
 		
 	}
 	
-	public Camino calcularDistancias(int nodoInicial) {
+	public Camino caminoCortoDijkstra(int nodoInicial) {
 		Camino camino = new Camino(cantNodos);
 		visitado = new boolean[cantNodos];
 
@@ -50,11 +50,11 @@ public class Grafo {
 	
 	
 	private int encontrarNodoMenorDistancia(Camino camino) {
-		int minDistancia = -1;
+		double minDistancia = -1;
 		int minIndex = -1;
 
 		for (int v = 0; v < cantNodos; v++) {
-			int costo = camino.getCosto(v);
+			double costo = camino.getCosto(v);
 			if (!visitado[v]) {
 				if (minIndex == -1 || minDistancia == -1 || (costo != -1 && costo < minDistancia)) {
 					minDistancia = costo;
@@ -86,6 +86,16 @@ public class Grafo {
 				System.out.printf("%4d", matrizAdyacencia[i][j]);
 			}
 			System.out.println(); // 
+		}
+	}
+	
+	public void sumarCosto(int costo) {
+		for(int i=0; i<matrizAdyacencia.length; i++) {
+			for(int j=0; j<matrizAdyacencia.length; j++) {
+				if(matrizAdyacencia[i][j] != -1) {
+					matrizAdyacencia[i][j] += costo;
+				}
+			}
 		}
 	}
 

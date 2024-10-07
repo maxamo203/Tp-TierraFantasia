@@ -13,5 +13,10 @@ public class PuebloAliado extends Pueblo {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public String toString() {
+		return "Ejercito aliado raza: " + raza + " habitantes: " + habitantes;
+	}
+
 
 }
