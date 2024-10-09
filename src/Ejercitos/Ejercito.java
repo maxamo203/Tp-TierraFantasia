@@ -1,14 +1,13 @@
 package Ejercitos;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Ejercito implements Atacante{
-	protected List<Atacante> tropas;
+	protected Queue<Atacante> tropas;
 	protected float vida = 0;
-	protected float danoRestante;
 	public Ejercito(String nombre, int cantidad) {
-		tropas = new ArrayList<Atacante>();
+		tropas = new LinkedList<Atacante>();
 		try {
 			agregarTropas(nombre, cantidad);
 		} catch (Exception e) {
@@ -34,21 +33,18 @@ public class Ejercito implements Atacante{
 
 	@Override
 	public float recibirDano(float dano) {
-		// TODO Auto-generated method stub
-		int indice = tropas.size()-1;
+		
 		float vidaActual = vida;
-		while(dano > 0 && indice >= 0) {
-			Atacante actual = tropas.get(indice);
+		while(dano > 0 && !tropas.isEmpty()) {
+			Atacante actual = tropas.peek(); //obtiene sin eliminar de la cola
 			int danoAplicado = (int)Math.min(dano, actual.getVida());
 			vida -= actual.recibirDano(danoAplicado);
 			if(actual.getVida()<=0) {
-				tropas.remove(indice);
-				indice--;
+				tropas.poll(); //elimina de la cola
 			}	
 			
 			dano -= danoAplicado;
 		}
-		danoRestante = dano;
 		return vidaActual-vida;
 		
 	}
@@ -68,6 +64,11 @@ public class Ejercito implements Atacante{
 	@Override
 	public String toString() {
 		return "EJERCITO HOSTIL";
+	}
+	@Override
+	public boolean fueAtacado() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

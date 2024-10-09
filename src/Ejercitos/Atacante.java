@@ -5,4 +5,5 @@ public interface Atacante {
 	public float recibirDano(float dano); //retorna la vida perdida
 	public void descansar();
 	public float getVida();
+	public boolean fueAtacado();
 }

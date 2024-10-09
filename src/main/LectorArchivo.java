@@ -58,6 +58,7 @@ public class LectorArchivo {
                     int destino = Integer.parseInt(partes[1]);
                     double costo = Double.parseDouble(partes[2]);
                     matrizAdyacencia[origen-1][destino-1] = costo;
+                    matrizAdyacencia[destino-1][origen-1] = costo; //la matriz es simetrica
                 }
             }
         } catch (IOException e) {
