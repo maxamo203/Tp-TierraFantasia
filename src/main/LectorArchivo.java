@@ -37,8 +37,8 @@ public class LectorArchivo {
                     String tipo = partes[3];
                     
                     if(tipo.equals("propio")) {
-                    	ejercitoPropio = new EjercitoAliado(raza.toUpperCase(), cantEjercito);
                     	posPuebloInicial = pueblo-1;
+                    	ejercitoPropio = new EjercitoAliado(raza.toUpperCase(), cantEjercito,posPuebloInicial);
                     	pueblos[pueblo-1] = null;
                     }
                     else if(tipo.equals("aliado")) {
@@ -46,7 +46,7 @@ public class LectorArchivo {
                     }
                     else if(tipo.equals("enemigo")){
                     	pueblos[pueblo-1] = new PuebloEnemigo(raza, cantEjercito);
-                    }
+                    } 
                 } else if (linea.contains("->")) {
                     partes = linea.split(" -> ");
                     int destino = Integer.parseInt(partes[1]);

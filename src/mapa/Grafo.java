@@ -98,5 +98,10 @@ public class Grafo {
 			}
 		}
 	}
+	public double getCostoAdyacencia(int i, int j) {
+		if(i >= matrizAdyacencia.length || j>=matrizAdyacencia.length || i<0||j<0)
+			throw new RuntimeException("Posicion Invalida de Grafo: " + i + " " + j);
+		return matrizAdyacencia[i][j];
+	}
 
 }

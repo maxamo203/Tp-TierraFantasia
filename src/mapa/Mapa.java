@@ -7,27 +7,37 @@ public class Mapa {
 	private Pueblo[] pueblos;
 	private Grafo grafo;
 	private int posPuebloInicial, posPuebloDestino;
+
 	private Mapa() {
-		
+
 	}
+
 	public static Mapa getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new Mapa();
 		}
 		return instance;
 	}
-	public void cargarMapa(Pueblo[] pueblos, double [][] distancias, int posPuebloDestino, int posPuebloInicial) throws Exception {
-		this.pueblos = pueblos;	
+
+	public void cargarMapa(Pueblo[] pueblos, double[][] distancias, int posPuebloDestino, int posPuebloInicial)
+			throws Exception {
+		this.pueblos = pueblos;
 		this.grafo = new Grafo(distancias);
 		this.posPuebloInicial = posPuebloInicial;
 		this.posPuebloDestino = posPuebloDestino;
 	}
-	
-	
-	public Stack<Integer> obtenerCaminoCorto(){
+
+	public Stack<Integer> obtenerCaminoCorto() {
 		grafo.sumarCosto(10);
 		Camino camino = grafo.caminoCortoDijkstra(posPuebloDestino);
 		grafo.sumarCosto(-10);
 		return camino.caminoEnPila(posPuebloDestino, posPuebloDestino);
+	}
+
+	public double getDistanciaAdyacentes(int ini, int fin) {
+		return grafo.getCostoAdyacencia(ini, fin);
+	}
+	public Pueblo getPueblo(int i) {
+		return pueblos[i];
 	}
 }

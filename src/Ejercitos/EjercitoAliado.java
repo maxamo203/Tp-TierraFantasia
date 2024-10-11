@@ -3,19 +3,23 @@ package Ejercitos;
 import java.util.ArrayList;
 import java.util.List;
 
+import mapa.Mapa;
 import mapa.Pueblo;
 
 public class EjercitoAliado extends Ejercito {
 	protected List<Atacante> tropasAliadas;
+	private static double velocidadXDia = 10;
 	private String razaInicial;
 	private int cantidadInicial;
 	private double tiempoDeMision;
-	public EjercitoAliado(String nombre, int cantidad) {
+	private int ubicacion;
+	public EjercitoAliado(String nombre, int cantidad, int ubicacionInicial) {
 		super(nombre, 0);
 		tiempoDeMision = 0;
 		razaInicial = nombre;
 		cantidadInicial = cantidad;
 		tropasAliadas = new ArrayList<Atacante>();
+		ubicacion = ubicacionInicial;
 		try {
 			agregarTropasAliadas(nombre, cantidad);
 		} catch (Exception e) {
@@ -75,10 +79,18 @@ public class EjercitoAliado extends Ejercito {
 		tiempoDeMision += t;
 	}
 	public Pueblo viajar(int indicePueblo) {
-		//TODO
-		return null;
+		double distancia = Mapa.getInstance().getDistanciaAdyacentes(ubicacion, indicePueblo);
+		aumentarTiempo(distancia/velocidadXDia);
+		ubicacion = indicePueblo;
+		return Mapa.getInstance().getPueblo(indicePueblo);
 	}
 	public void generarInforme() {
 		System.out.println("Tiempo: " + tiempoDeMision);
+	}
+	public int getUbicacion() {
+		return ubicacion;
+	}
+	public void setUbicacion(int u) {
+		ubicacion = u;
 	}
 }

@@ -45,7 +45,7 @@ public class Main {
 			Pueblo puebloDestino = miejercito.viajar(proximoPueblo);
 			puebloDestino.interactuar(miejercito);
 		}
-		listaPueblosCercanos.clear();
+		listaPueblosCercanos.clear(); 
 		if(miejercito.getVida()>0) {
 			System.out.println("Mision Factible");
 			miejercito.generarInforme();
