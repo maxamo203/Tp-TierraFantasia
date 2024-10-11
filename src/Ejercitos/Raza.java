@@ -10,7 +10,7 @@ public abstract class Raza implements Atacante  {
 		this.dano = dano;
 		wasAttacked = false;
 	}
-    public static Raza crear(String nombre) throws Exception {
+    public static Raza crear(String nombre){
         switch(nombre) {
         case "WRIVES":
         	return new Wrives();
@@ -21,7 +21,7 @@ public abstract class Raza implements Atacante  {
         case "NORTAICHIAN":
         	return new Nortaichian();
         default:
-        	throw new Exception("Nombre invalido");
+        	throw new RuntimeException("Nombre invalido");
         }
     }
     @Override

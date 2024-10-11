@@ -20,7 +20,7 @@ public class Wrives extends Raza{
 			danoFinal *= 2;
 			ataqueDobleActual = ataqueDoble;
 		}
-		ataqueDoble--;
+		ataqueDobleActual--;
 		return danoFinal;
 	}
 
