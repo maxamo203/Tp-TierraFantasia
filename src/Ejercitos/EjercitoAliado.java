@@ -9,8 +9,10 @@ public class EjercitoAliado extends Ejercito {
 	protected List<Atacante> tropasAliadas;
 	private String razaInicial;
 	private int cantidadInicial;
+	private double tiempoDeMision;
 	public EjercitoAliado(String nombre, int cantidad) {
 		super(nombre, 0);
+		tiempoDeMision = 0;
 		razaInicial = nombre;
 		cantidadInicial = cantidad;
 		tropasAliadas = new ArrayList<Atacante>();
@@ -37,20 +39,7 @@ public class EjercitoAliado extends Ejercito {
 	
 	@Override
 	public float recibirDano(float dano) {
-		super.recibirDano(dano);
-		int indice = tropasAliadas.size()-1;
-		float vidaActual = vida;
-		while(danoRestante > 0 && indice >= 0) {
-			Atacante actual = tropasAliadas.get(indice);
-			int danoAplicado = (int)Math.min(dano, actual.getVida());
-			vida -= actual.recibirDano(danoAplicado);
-			if(actual.getVida()<=0) {
-				tropasAliadas.remove(indice);
-				indice--;
-				dano -= danoAplicado;
-			}
-		}
-		return vidaActual-vida;
+		return super.recibirDano(dano);
 	}
 	
 	@Override
@@ -73,17 +62,23 @@ public class EjercitoAliado extends Ejercito {
 		}
 		return 0;
 	}
-	
+	public void reacomodarTropas() {
+		if(tropas.peek().fueAtacado()) {
+			tropas.add(tropas.poll()); //elimina e inserta al inicio 
+		}
+	}
 	@Override
 	public String toString() {
 		return "EJERCITO ALIADO";
 	}
-	
+	public void aumentarTiempo(double t) {
+		tiempoDeMision += t;
+	}
 	public Pueblo viajar(int indicePueblo) {
 		//TODO
 		return null;
 	}
 	public void generarInforme() {
-		//TODO
+		System.out.println("Tiempo: " + tiempoDeMision);
 	}
 }

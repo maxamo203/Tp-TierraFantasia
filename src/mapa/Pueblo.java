@@ -1,6 +1,6 @@
 package mapa;
 
-import Ejercitos.Ejercito;
+import Ejercitos.EjercitoAliado;
 
 public abstract class Pueblo {
 	protected String raza;
@@ -9,5 +9,5 @@ public abstract class Pueblo {
 		this.raza = raza;
 		this.habitantes = habitantes;
 	}
-	public abstract void interactuar(Ejercito e);
+	public abstract void interactuar(EjercitoAliado e);
 }
