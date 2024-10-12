@@ -3,7 +3,7 @@ package mapa;
 import Ejercitos.EjercitoAliado;
 
 public class PuebloAliado extends Pueblo {
-	private static final float tiempoDescanso = 24;
+	private static final float tiempoDescanso = 1;
 	public PuebloAliado(String raza, int habitantes) {
 		super(raza, habitantes);
 	}

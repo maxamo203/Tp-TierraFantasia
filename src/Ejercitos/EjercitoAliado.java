@@ -7,7 +7,7 @@ import mapa.Mapa;
 import mapa.Pueblo;
 
 public class EjercitoAliado extends Ejercito {
-	protected List<Atacante> tropasAliadas;
+	//protected List<Atacante> tropasAliadas;
 	private static double velocidadXDia = 10;
 	private String razaInicial;
 	private int cantidadInicial;
@@ -18,27 +18,18 @@ public class EjercitoAliado extends Ejercito {
 		tiempoDeMision = 0;
 		razaInicial = nombre;
 		cantidadInicial = cantidad;
-		tropasAliadas = new ArrayList<Atacante>();
+		//tropasAliadas = new ArrayList<Atacante>();
 		ubicacion = ubicacionInicial;
 		try {
-			agregarTropasAliadas(nombre, cantidad);
+			agregarTropas(nombre, cantidad);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	public void agregarTropasAliadas(String nombre, int cantidad) throws Exception {
-		for(int i = 0;i<cantidad;i++) {
-			tropasAliadas.add(Raza.crear(nombre));
-		}
-	}
 	@Override
 	public int atacar() {
-		int danoTotal = 0;
-		for(Atacante a: tropasAliadas) {
-			danoTotal += a.atacar();
-		}
-		return danoTotal + super.atacar(); //retorna el daño del ejercito aliado + ejercito propio
+		return super.atacar(); //retorna el daño del ejercito aliado + ejercito propio
 	}
 	
 	@Override
@@ -48,23 +39,11 @@ public class EjercitoAliado extends Ejercito {
 	
 	@Override
 	public void descansar() {
-		// TODO Auto-generated method stub
 		super.descansar();
-		for(Atacante a: tropasAliadas) {
-			a.descansar();
-		}
 	}
 	@Override
-	public float getVida() { //me interesa saber si hay algun soldado con vida, no la vida total de todos
-		float vidaEjercitoAliado = super.getVida();
-		if(vidaEjercitoAliado>0)
-			return vidaEjercitoAliado;
-		for(Atacante a: tropasAliadas) {
-			if(a.getVida()>0) {
-				return a.getVida();
-			}
-		}
-		return 0;
+	public float getVida() { 
+		return super.getVida();
 	}
 	public void reacomodarTropas() {
 		if(tropas.peek().fueAtacado()) {
@@ -85,7 +64,8 @@ public class EjercitoAliado extends Ejercito {
 		return Mapa.getInstance().getPueblo(indicePueblo);
 	}
 	public void generarInforme() {
-		System.out.println("Tiempo: " + tiempoDeMision);
+		System.out.println("Tiempo: " + tiempoDeMision + " dias.\n"+
+				"Tropas restantes: " + tropas.size());
 	}
 	public int getUbicacion() {
 		return ubicacion;

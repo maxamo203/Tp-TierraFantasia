@@ -13,11 +13,11 @@ public class ControladorBatalla {
 			 if(vaEjercitoAliado) {
 				 dano = eAliado.atacar();
 				 eEnemigo.recibirDano(dano);
-				 System.out.println(eAliado.getClass() +" "+ dano);
+//				 System.out.println(eAliado.getClass() +" "+ dano);
 			 }else {
 				 dano = eEnemigo.atacar();
 				 eAliado.recibirDano(dano);
-				 System.out.println(eEnemigo.getClass() +" "+ dano);
+//				 System.out.println(eEnemigo.getClass() +" "+ dano);
 			 }
 			 vaEjercitoAliado = !vaEjercitoAliado;
 		 }

@@ -29,9 +29,9 @@ public class Mapa {
 
 	public Stack<Integer> obtenerCaminoCorto() {
 		grafo.sumarCosto(10);
-		Camino camino = grafo.caminoCortoDijkstra(posPuebloDestino);
+		Camino camino = grafo.caminoCortoDijkstra(posPuebloInicial);
 		grafo.sumarCosto(-10);
-		return camino.caminoEnPila(posPuebloDestino, posPuebloDestino);
+		return camino.caminoEnPila(posPuebloDestino, posPuebloInicial);
 	}
 
 	public double getDistanciaAdyacentes(int ini, int fin) {

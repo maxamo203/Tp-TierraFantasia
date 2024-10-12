@@ -3,7 +3,7 @@ package main;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.util.Arrays;
 
 import Ejercitos.EjercitoAliado;
 import mapa.Pueblo;
@@ -26,6 +26,9 @@ public class LectorArchivo {
             cantPueblos = Integer.parseInt(partes[0]);
             pueblos = new Pueblo[cantPueblos];
             matrizAdyacencia = new double[cantPueblos][cantPueblos];
+            for (int i = 0; i < matrizAdyacencia.length; i++) {
+                Arrays.fill(matrizAdyacencia[i], -1);
+            }
             while ((linea = br.readLine()) != null) {
                 if (linea.trim().isEmpty()) continue;                // Saltar líneas vacías
 
@@ -42,10 +45,10 @@ public class LectorArchivo {
                     	pueblos[pueblo-1] = null;
                     }
                     else if(tipo.equals("aliado")) {
-                    	pueblos[pueblo-1] = new PuebloAliado(raza, cantEjercito); 
+                    	pueblos[pueblo-1] = new PuebloAliado(raza.toUpperCase(), cantEjercito); 
                     }
                     else if(tipo.equals("enemigo")){
-                    	pueblos[pueblo-1] = new PuebloEnemigo(raza, cantEjercito);
+                    	pueblos[pueblo-1] = new PuebloEnemigo(raza.toUpperCase(), cantEjercito);
                     } 
                 } else if (linea.contains("->")) {
                     partes = linea.split(" -> ");

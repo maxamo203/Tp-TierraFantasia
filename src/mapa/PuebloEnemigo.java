@@ -5,7 +5,7 @@ import Ejercitos.Ejercito;
 import Ejercitos.EjercitoAliado;
 
 public class PuebloEnemigo extends Pueblo {
-	private static final float tiempoBatalla = 24;
+	private static final float tiempoBatalla = 1;
 	public PuebloEnemigo(String raza, int habitantes) {
 		super(raza, habitantes);
 	}
