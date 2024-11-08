@@ -12,7 +12,7 @@ public class Ejercitos {
 
 	@Test
 	public void test1() {
-		Ejercito e1 = new Ejercito("WRIVES", 2);
+		EjercitoAliado e1 = new EjercitoAliado("WRIVES", 2,0);
 		Ejercito e2 = new Ejercito("RERALOPES", 4);
 		Ejercito ganador = new ControladorBatalla(e1, e2).disputarBatalla();
 		assertEquals("Ganan wrives", ganador, e1);
@@ -21,7 +21,7 @@ public class Ejercitos {
 
 	@Test
 	public void test2() {
-		Ejercito e1 = new Ejercito("WRIVES", 4);
+		EjercitoAliado e1 = new EjercitoAliado("WRIVES", 4,0);
 		Ejercito e2 = new Ejercito("RERALOPES", 16);
 		e1.descansar();
 		Ejercito ganador = new ControladorBatalla(e1, e2).disputarBatalla();
@@ -31,7 +31,7 @@ public class Ejercitos {
 
 	@Test
 	public void test3() {
-		Ejercito e1 = new Ejercito("WRIVES", 20);
+		EjercitoAliado e1 = new EjercitoAliado("WRIVES", 20,0);
 		Ejercito e2 = new Ejercito("RERALOPES", 50);
 		e2.descansar();
 		Ejercito ganador = new ControladorBatalla(e1, e2).disputarBatalla();
@@ -41,7 +41,7 @@ public class Ejercitos {
 
 	@Test
 	public void test4() {
-		Ejercito e1 = new Ejercito("RADAITERAN", 20);
+		EjercitoAliado e1 = new EjercitoAliado("RADAITERAN", 20, 0);
 		Ejercito e2 = new Ejercito("NORTAICHIAN", 50);
 		e1.descansar();
 		e2.descansar();
