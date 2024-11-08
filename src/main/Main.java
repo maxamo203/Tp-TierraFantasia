@@ -6,12 +6,12 @@ import java.util.Stack;
 import Ejercitos.ControladorBatalla;
 import Ejercitos.Ejercito;
 import Ejercitos.EjercitoAliado;
-import Ejercitos.Nortaichian;
-import Ejercitos.Radaiteran;
-import Ejercitos.Reralopes;
-import Ejercitos.Wrives;
 import mapa.Mapa;
 import mapa.Pueblo;
+import razas.Nortaichian;
+import razas.Radaiteran;
+import razas.Reralopes;
+import razas.Wrives;
 
 public class Main {
 
@@ -45,7 +45,7 @@ public class Main {
 			Pueblo puebloDestino = miejercito.viajar(proximoPueblo);
 			puebloDestino.interactuar(miejercito);
 		}
-		listaPueblosCercanos.clear(); 
+		listaPueblosCercanos.clear();
 		if(miejercito.getVida()>0) {
 			System.out.println("Mision Factible");
 			miejercito.generarInforme();

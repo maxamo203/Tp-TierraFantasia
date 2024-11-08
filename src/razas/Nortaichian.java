@@ -1,4 +1,4 @@
-package Ejercitos;
+package razas;
 
 public class Nortaichian extends Raza{
 	

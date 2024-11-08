@@ -1,4 +1,6 @@
-package Ejercitos;
+package razas;
+
+import Ejercitos.Atacante;
 
 public abstract class Raza implements Atacante  {
 	public static String NOMBRE;

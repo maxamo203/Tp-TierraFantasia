@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import Ejercitos.*;
+import mapa.PuebloAliado;
+import mapa.PuebloEnemigo;
 
 public class Ejercitos {
 
@@ -55,6 +57,21 @@ public class Ejercitos {
 			new Ejercito("wrive", 100);
 	    });
 	    assertEquals("Nombre de raza invalido: "+"wrive", exception.getMessage());
+	}
+	
+	@Test
+	public void test6() {
+		EjercitoAliado eA = new EjercitoAliado("WRIVES", 100, 0);
+		PuebloAliado pA = new PuebloAliado("RADAITERAN", 30);
+		pA.interactuar(eA);
+		assertEquals(10800+36*(30/2),eA.getVida(),0.001);
+	}
+	@Test
+	public void test7() {
+		EjercitoAliado eA = new EjercitoAliado("WRIVES", 30, 0);
+		PuebloEnemigo pA = new PuebloEnemigo("RADAITERAN", 100);
+		pA.interactuar(eA);
+		assertEquals(30*108,eA.getVida(),0.001);
 	}
 
 }

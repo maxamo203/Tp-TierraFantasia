@@ -3,6 +3,8 @@ package Ejercitos;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import razas.Raza;
+
 public class Ejercito implements Atacante {
 	protected Queue<Atacante> tropas;
 	protected float vida = 0;

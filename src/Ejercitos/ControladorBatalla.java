@@ -1,9 +1,11 @@
 package Ejercitos;
 
 public class ControladorBatalla {
-	private Ejercito eAliado,eEnemigo;
+	private static final float tiempoBatalla = 1;
+	private EjercitoAliado eAliado;
+	private Ejercito eEnemigo;
 	private boolean vaEjercitoAliado = true; //sirve para ver de quien es el turno, por defecto, del ejercito aliado
-	public ControladorBatalla(Ejercito e1, Ejercito e2) {
+	public ControladorBatalla(EjercitoAliado e1, Ejercito e2) {
 		eAliado = e1;
 		eEnemigo = e2;
 	}
@@ -23,6 +25,8 @@ public class ControladorBatalla {
 		 }
 		 
 		 if(eAliado.getVida()>0) {
+			 eAliado.aumentarTiempo(tiempoBatalla);
+			 eAliado.reacomodarTropas();
 			 return eAliado;
 		 }else {
 			 return eEnemigo;

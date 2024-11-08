@@ -1,4 +1,4 @@
-package Ejercitos;
+package razas;
 
 public class Reralopes extends Raza{
 	private final static int vidaInicial = 53;

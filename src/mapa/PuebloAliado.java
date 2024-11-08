@@ -19,7 +19,7 @@ public class PuebloAliado extends Pueblo {
 			e1.printStackTrace();
 		}
 	}
-	
+	@Override
 	public String toString() {
 		return "Ejercito aliado raza: " + raza + " habitantes: " + habitantes;
 	}
