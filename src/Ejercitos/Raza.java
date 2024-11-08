@@ -21,7 +21,7 @@ public abstract class Raza implements Atacante  {
         case "NORTAICHIAN":
         	return new Nortaichian();
         default:
-        	throw new RuntimeException("Nombre invalido");
+        	throw new RuntimeException("Nombre de raza invalido: " + nombre);
         }
     }
     @Override

@@ -51,9 +51,10 @@ public class Ejercitos {
 	@Test
 	public void test5() {
 
-		assertThrows(RuntimeException.class, ()->{
+		RuntimeException exception = assertThrows(RuntimeException.class, () -> {
 			new Ejercito("wrive", 100);
-		});
+	    });
+	    assertEquals("Nombre de raza invalido: "+"wrive", exception.getMessage());
 	}
 
 }
