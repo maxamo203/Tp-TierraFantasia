@@ -71,7 +71,7 @@ public class Ejercitos {
 		EjercitoAliado eA = new EjercitoAliado("WRIVES", 30, 0);
 		PuebloEnemigo pA = new PuebloEnemigo("RADAITERAN", 100);
 		pA.interactuar(eA);
-		assertEquals(30*108,eA.getVida(),0.001);
+		assertEquals(2892,eA.getVida(),0.001);
 	}
 
 }

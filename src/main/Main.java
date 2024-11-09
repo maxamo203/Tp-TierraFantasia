@@ -3,6 +3,8 @@ package main;
 import java.util.Queue;
 import java.util.Stack;
 
+import javax.annotation.processing.Generated;
+
 import Ejercitos.ControladorBatalla;
 import Ejercitos.Ejercito;
 import Ejercitos.EjercitoAliado;
