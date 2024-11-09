@@ -30,6 +30,9 @@ public class Camino {
 		int nodo = nodoDestino;
         Stack<Integer> pila = new Stack<>();
 		while(nodo != nodoPartida) {
+			if(costos[nodo] == -1) {
+				throw new RuntimeException();
+			}
 			pila.push(nodo);
 			nodo = caminos[nodo];
 		}
