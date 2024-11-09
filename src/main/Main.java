@@ -41,11 +41,13 @@ public class Main {
 			e.printStackTrace();
 		}
 		EjercitoAliado miejercito = LectorArchivo.ejercitoPropio;
+		
+		
 		Stack<Integer> listaPueblosCercanos;
 		try {
 			listaPueblosCercanos = mapa.obtenerCaminoCorto();
 		}catch(RuntimeException e) {
-			System.out.println("Mision no factible, Pueblo no alcanzable");
+			System.out.println("Mision no factible, Pueblo inalcanzable");
 			return;
 		}
 		while(!listaPueblosCercanos.isEmpty() && miejercito.getVida() > 0) {
@@ -62,12 +64,6 @@ public class Main {
 		else {
 			System.out.println("Mision No Factible");
 		}
-//		ControladorBatalla cont = new ControladorBatalla(
-//				new EjercitoAliado(Wrives.NOMBRE, 100), 
-//				new Ejercito(Radaiteran.NOMBRE,500));
-//		
-//		Ejercito e = cont.disputarBatalla();
-//		System.out.println(e);
 	}
 
 }
