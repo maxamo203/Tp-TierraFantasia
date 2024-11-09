@@ -12,15 +12,16 @@ public class Reralopes extends Raza{
 	}
 	
 	@Override
-	public int atacar() {
+	protected int ataqueRaza() {
 		int danoFinal;
 		contadorAtaques = (contadorAtaques + 1)%4;
 		if(contadorAtaques == 0 || contadorAtaques == 2) {
 			danoFinal =  danoBasico * (turnosConMultiplicador>0?multiplicadorDaño:1);
+			turnosConMultiplicador--;
 		}else {
 			danoFinal = 0;
 		}
-		turnosConMultiplicador--;
+		
 		return danoFinal;
 	}
 

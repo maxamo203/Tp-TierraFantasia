@@ -30,6 +30,15 @@ public abstract class Raza implements Atacante  {
 	public float getVida() {
 		return vida;
 	}
+    
+    protected abstract int ataqueRaza();
+    @Override
+    public final int atacar() {
+    	if(this.vida <= 0)
+    		return 0;
+    	return ataqueRaza();
+    	
+    }
     @Override
     public float recibirDano(float dano) {
     	if(dano > 0)
@@ -43,3 +52,6 @@ public abstract class Raza implements Atacante  {
     	return wasAttacked;
     }
 }
+
+
+

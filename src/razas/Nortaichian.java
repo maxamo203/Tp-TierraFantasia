@@ -10,16 +10,16 @@ public class Nortaichian extends Raza{
 	private static final int multiplicadorDano = 2;
 	private int turnosPiedra = 0;
 	
-	protected Nortaichian() {
+	public Nortaichian() {
 		super(vidaInicial, danoBasico);
 	}
 
 	@Override
-	public int atacar() {
-		vida += vidaInicial*regeneracionVida;
+	protected int ataqueRaza() {
 		if(turnosPiedra-- > 0) {
 			return 0;
 		}
+		vida = Math.min(vida + vidaInicial*regeneracionVida,vidaInicial);
 		return contadorAtaquesFuriosos-->0?dano*multiplicadorDano:dano;
 	}
 

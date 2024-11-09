@@ -13,14 +13,14 @@ public class Wrives extends Raza{
 	}
 	
 	@Override
-	public int atacar() {
+	protected int ataqueRaza() {
 		if(!quiereAtacar) return 0;
 		int danoFinal = dano;
+		ataqueDobleActual--;
 		if(ataqueDobleActual == 0) {
 			danoFinal *= 2;
 			ataqueDobleActual = ataqueDoble;
 		}
-		ataqueDobleActual--;
 		return danoFinal;
 	}
 

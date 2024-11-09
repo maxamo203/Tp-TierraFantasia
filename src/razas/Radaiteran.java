@@ -7,12 +7,12 @@ public class Radaiteran extends Raza{
 	public static final String NOMBRE = "RADAITERAN";
 	private int contadorAtaques = 0;
 	private static int aumentoDano = 3;
-	protected Radaiteran() {
+	public Radaiteran() {
 		super(vidaInicial, danoBasico);
 	}
 
 	@Override
-	public int atacar() {
+	protected int ataqueRaza() {
 		return dano + (aumentoDano * contadorAtaques++);
 	}
 
