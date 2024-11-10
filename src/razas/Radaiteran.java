@@ -1,5 +1,7 @@
 package razas;
 
+import Ejercitos.Atacante;
+
 public class Radaiteran extends Raza{
 
 	private final static int vidaInicial = 36;
@@ -10,6 +12,17 @@ public class Radaiteran extends Raza{
 	public Radaiteran() {
 		super(vidaInicial, danoBasico);
 	}
+	
+	public Radaiteran(Radaiteran original) {
+		super(original);
+	}
+	
+	public Atacante clone() {
+		Radaiteran clon = new Radaiteran(this);
+		clon.contadorAtaques = this.contadorAtaques;
+		return clon;
+	}
+
 
 	@Override
 	protected int ataqueRaza() {

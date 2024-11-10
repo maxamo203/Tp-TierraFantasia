@@ -1,5 +1,7 @@
 package razas;
 
+import Ejercitos.Atacante;
+
 public class Wrives extends Raza{
 	
 	private final static int vidaInicial = 108;
@@ -10,6 +12,17 @@ public class Wrives extends Raza{
 	private boolean quiereAtacar = true;
 	public Wrives() {
 		super(vidaInicial, danoBasico);
+	}
+	
+	public Wrives(Wrives original) {
+		super(original);
+	}
+	
+	public Atacante clone() {
+		Wrives clon = new Wrives(this);
+		clon.ataqueDobleActual = this.ataqueDobleActual;
+		clon.quiereAtacar = this.quiereAtacar; 
+		return clon;
 	}
 	
 	@Override

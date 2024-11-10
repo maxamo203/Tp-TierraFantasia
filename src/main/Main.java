@@ -34,20 +34,22 @@ public class Main {
 		 ....por ahora, decimos que no hay camino posible
 		 */
 		Mapa mapa = Mapa.getInstance();
-		LectorArchivo.leerArchivo("input2.txt");
+		LectorArchivo.leerArchivo("input.txt");
 		try {
 			mapa.cargarMapa(LectorArchivo.pueblos, LectorArchivo.matrizAdyacencia, LectorArchivo.posPuebloFinal, LectorArchivo.posPuebloInicial);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		EjercitoAliado miejercito = LectorArchivo.ejercitoPropio;
-		
+		EjercitoAliado aux = miejercito.clone();
+		Mapa.getInstance().getCaminoCortoFactible(aux);
 		
 		Stack<Integer> listaPueblosCercanos;
 		try {
 			listaPueblosCercanos = mapa.obtenerCaminoCorto();
 		}catch(RuntimeException e) {
 			System.out.println("Mision no factible, Pueblo inalcanzable");
+			e.printStackTrace();
 			return;
 		}
 		while(!listaPueblosCercanos.isEmpty() && miejercito.getVida() > 0) {
@@ -62,6 +64,7 @@ public class Main {
 			return;
 		}
 		else {
+			
 			System.out.println("Mision No Factible");
 		}
 	}

@@ -1,4 +1,5 @@
 package razas;
+import Ejercitos.Atacante;
 
 public class Nortaichian extends Raza{
 	
@@ -12,6 +13,17 @@ public class Nortaichian extends Raza{
 	
 	public Nortaichian() {
 		super(vidaInicial, danoBasico);
+	}
+	
+	public Nortaichian(Nortaichian original) {
+		super(original);
+	}
+	
+	public Atacante clone() {
+		Nortaichian clon = new Nortaichian(this);
+		clon.contadorAtaquesFuriosos = this.contadorAtaquesFuriosos;
+		clon.turnosPiedra = this.turnosPiedra;
+		return clon;
 	}
 
 	@Override

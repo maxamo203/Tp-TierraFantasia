@@ -13,7 +13,6 @@ public class PuebloEnemigo extends Pueblo {
 	public void interactuar(EjercitoAliado e) {
 		Ejercito ejercitoEnemigo = new Ejercito(raza, habitantes);
 		Ejercito ganador = new ControladorBatalla(e, ejercitoEnemigo).disputarBatalla();
-
 	}
 	
 	public String toString() {

@@ -1,5 +1,7 @@
 package razas;
 
+import Ejercitos.Atacante;
+
 public class Reralopes extends Raza{
 	private final static int vidaInicial = 53;
 	private final static int danoBasico = 27;
@@ -10,6 +12,18 @@ public class Reralopes extends Raza{
 	public Reralopes() {
 		super(vidaInicial, danoBasico);
 	}
+	
+	public Reralopes(Reralopes original) {
+		super(original);
+	}
+	
+	public Atacante clone() {
+		Reralopes clon = new Reralopes(this);
+		clon.contadorAtaques = this.contadorAtaques;
+		clon.turnosConMultiplicador = this.turnosConMultiplicador; 
+		return clon;
+	}
+
 	
 	@Override
 	protected int ataqueRaza() {

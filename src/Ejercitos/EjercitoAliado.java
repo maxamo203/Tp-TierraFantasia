@@ -27,6 +27,15 @@ public class EjercitoAliado extends Ejercito {
 			e.printStackTrace();
 		}
 	}
+	
+	public EjercitoAliado clone() {
+	    EjercitoAliado clon = new EjercitoAliado(razaInicial, cantidadInicial, ubicacion);
+	    for (Atacante atacante : this.tropas) {
+	        clon.tropas.add(atacante.clone()); // Asumiendo que Atacante tiene un método clone() que realiza una copia profunda
+	    }
+	    return clon;
+	}
+	
 	@Override
 	public int atacar() {
 		return super.atacar(); //retorna el daño del ejercito aliado + ejercito propio

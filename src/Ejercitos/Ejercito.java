@@ -12,7 +12,10 @@ public class Ejercito implements Atacante {
 	public Ejercito(String nombre, int cantidad) {
 		tropas = new LinkedList<Atacante>();
 		agregarTropas(nombre, cantidad);
-
+	}
+	
+	public Atacante clone() {
+		return null;
 	}
 
 	public void agregarTropas(String nombre, int cantidad) {

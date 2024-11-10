@@ -12,6 +12,13 @@ public abstract class Raza implements Atacante  {
 		this.dano = dano;
 		wasAttacked = false;
 	}
+	
+	protected Raza(Raza original) {
+		this.vida = original.vida;
+		this.dano = original.dano;
+		this.wasAttacked = original.wasAttacked;
+	}
+	
     public static Raza crear(String nombre){
         switch(nombre) {
         case "WRIVES":
@@ -26,6 +33,9 @@ public abstract class Raza implements Atacante  {
         	throw new RuntimeException("Nombre de raza invalido: " + nombre);
         }
     }
+  
+    public abstract Atacante clone();
+    
     @Override
 	public float getVida() {
 		return vida;

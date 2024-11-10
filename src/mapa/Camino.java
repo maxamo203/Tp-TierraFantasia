@@ -56,4 +56,11 @@ public class Camino {
 		return cantNodos;
 	}
 	
+	public String toString() {
+		String out = "";
+		for(Integer nodo: caminos) {
+			out+= nodo + " ";
+		}
+		return out;
+	}
 }

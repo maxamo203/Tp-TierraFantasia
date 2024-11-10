@@ -1,6 +1,8 @@
 package mapa;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Grafo {
 	private double [][] matrizAdyacencia;
@@ -103,5 +105,16 @@ public class Grafo {
 			throw new RuntimeException("Posicion Invalida de Grafo: " + i + " " + j);
 		return matrizAdyacencia[i][j];
 	}
+
+	public List<Integer> getAdyacencias(int pueblo) {
+		List<Integer> adyacencias = new ArrayList<>();
+		for(int i=0; i<cantNodos; i++) {
+			if(matrizAdyacencia[pueblo][i] != Integer.MAX_VALUE) {
+				adyacencias.add(i);
+			}
+		}
+		return adyacencias;
+	}
+
 
 }

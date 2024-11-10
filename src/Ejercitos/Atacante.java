@@ -6,4 +6,5 @@ public interface Atacante {
 	public void descansar();
 	public float getVida();
 	public boolean fueAtacado();
+	public Atacante clone();
 }
