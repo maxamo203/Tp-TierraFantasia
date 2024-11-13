@@ -21,14 +21,14 @@ public class ResultadoNodo {
 	}
 	
 	public NodeData getLI() {
-		return LS;
+		return LI;
 	}
 	
 	public NodeData getCamino() {
 		return camino;
 	}
 	
-	public boolean isDeadEndRoan() {
+	public boolean isDeadEndRoad() {
 		return deadEndRoad;
 	}
 }

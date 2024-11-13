@@ -10,7 +10,7 @@ public class ControladorBatalla {
 		eEnemigo = e2;
 	}
 	public Ejercito disputarBatalla() {
-		 while(eAliado.getVida()>0 && eEnemigo.getVida()>0) {
+		 while(eAliado.getVida()>0.01 && eEnemigo.getVida()>0.01) {
 			 int dano;
 			 if(vaEjercitoAliado) {
 				 dano = eAliado.atacar();
@@ -24,7 +24,7 @@ public class ControladorBatalla {
 			 vaEjercitoAliado = !vaEjercitoAliado;
 		 }
 		 
-		 if(eAliado.getVida()>0) {
+		 if(eAliado.getVida()>0.01) {
 			 eAliado.aumentarTiempo(tiempoBatalla);
 			 eAliado.reacomodarTropas();
 			 return eAliado;
