@@ -35,7 +35,7 @@ public class Main {
 		 ....por ahora, decimos que no hay camino posible
 		 */
 		Mapa mapa = Mapa.getInstance();
-		LectorArchivo.leerArchivo("input3.txt");
+		LectorArchivo.leerArchivo("testRandom.txt");
 		try {
 			mapa.cargarMapa(LectorArchivo.pueblos, LectorArchivo.matrizAdyacencia, LectorArchivo.posPuebloFinal, LectorArchivo.posPuebloInicial);
 		} catch (Exception e) {
@@ -60,6 +60,7 @@ public class Main {
 		listaPueblosCercanos.clear();
 		if(miejercito.getVida()>0) {
 			System.out.println("Mision Factible");
+			System.out.println(mapa.obtenerCaminoCorto_noPila());
 			miejercito.generarInforme();
 			return;
 		}
@@ -70,7 +71,7 @@ public class Main {
 			if(resultado == null) {
 				System.out.println("No existe camino posible");
 			}else {
-				System.out.println(mapa.getCaminoCortoFactible(aux));				
+				System.out.println(resultado);				
 			}
 		}
 	}

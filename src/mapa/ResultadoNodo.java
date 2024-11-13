@@ -1,23 +1,17 @@
 package mapa;
 
 public class ResultadoNodo {
-	private NodeData LS;
 	private NodeData LI;
 	private NodeData camino;
 	private boolean deadEndRoad = false;
 	
-	public ResultadoNodo(NodeData LI, NodeData LS, NodeData camino) {
-		this.LS = LS;
+	public ResultadoNodo(NodeData LI, NodeData camino) {
 		this.LI = LI;
 		this.camino = camino;
 	}
 	
 	public ResultadoNodo() {
 		deadEndRoad = true;
-	}
-	
-	public NodeData getLS() {
-		return LS;
 	}
 	
 	public NodeData getLI() {

@@ -11,14 +11,16 @@ public class NodeData {
     private double costo;
     private boolean deadEndRoad = false;
     
-    public NodeData(Stack<Integer> camino, EjercitoAliado ejercito, double costo2) {
+    public NodeData(Stack<Integer> camino, EjercitoAliado ejercito, double costo) {
     	this.camino = camino;
     	this.ejercito = ejercito;
-    	this.costo = costo2;
+    	this.costo = costo;
     }
     
-    public NodeData() {
+    public NodeData(Stack<Integer> camino) {
+    	this.camino = camino;
     	deadEndRoad = true;
+    	
     }
     
     public Stack<Integer> getCamino() {
