@@ -17,6 +17,8 @@ public class Mapa {
 	private int posPuebloInicial, posPuebloDestino;
 	private static int cantLlamadas = 0;
 	private static int cantSaltos = 0;
+	private Stack<Integer> caminoCorto;
+	private int costoCaminoCorto;
 
 	private Mapa() {
 
@@ -39,11 +41,25 @@ public class Mapa {
 	
 	public Stack<Integer> obtenerCaminoCorto() {
 		Camino camino = grafo.caminoCortoDijkstra(posPuebloInicial);
-		return camino.caminoEnPila(posPuebloDestino, posPuebloInicial);
+		this.caminoCorto = camino.caminoEnPila(posPuebloDestino, posPuebloInicial);
+		Stack<Integer> caminoResultado = new Stack<Integer>();
+		caminoResultado.addAll(caminoCorto);
+		return caminoResultado;
 	}
 	
-	public String obtenerCaminoCorto_noPila() {
-		return grafo.caminoCortoDijkstra(posPuebloInicial).toString(posPuebloDestino, posPuebloInicial);
+	public String mostrarCaminoCorto() {
+        String out = "Camino: ";
+        Stack<Integer> pilaAuxiliar = new Stack<>();
+        while (!this.caminoCorto.isEmpty()) {
+            pilaAuxiliar.push(this.caminoCorto.pop());
+        }
+        while (!pilaAuxiliar.isEmpty()) {
+            Integer elemento = pilaAuxiliar.pop();
+            out += elemento + " <- ";
+            this.caminoCorto.push(elemento);
+        }
+        out += "0";
+        return out;
 	}
 	
 	public double getDistanciaAdyacentes(int ini, int fin) {
@@ -56,16 +72,13 @@ public class Mapa {
 	public NodeData getCaminoCortoFactible(EjercitoAliado ejercito) {
 		HashMap<Integer, List<NodeData>> map = new HashMap<Integer,List<NodeData>>();
 		HashSet<Integer> visitados = new HashSet<Integer>();
-		ResultadoNodo resultado = _getCaminosFactible(posPuebloInicial ,map, ejercito, visitados, 0);
+		NodeData resultado = _getCaminosFactible(posPuebloInicial ,map, ejercito, visitados, 0);
 		System.out.println("llamadas:" + cantLlamadas);
 		System.out.println("saltos:" +cantSaltos);
-		if (resultado.getCamino() != null) {			
-			return resultado.getCamino();
-		}
-		return null;
+		return resultado;
 	}
 	
-	private ResultadoNodo _getCaminosFactible(int pueblo,HashMap<Integer, List<NodeData>> map, 
+	private NodeData _getCaminosFactible(int pueblo,HashMap<Integer, List<NodeData>> map, 
 										EjercitoAliado ejercito, HashSet<Integer> visitados, double costo) {
 		cantLlamadas++;
 		if(pueblo == posPuebloDestino) { //Condición de corte donde llegue al destino
@@ -75,10 +88,10 @@ public class Mapa {
 			stack.push(pueblo);
 			if(clon.getVida()>0.01) {    //Si gano devuelvo un camino que llega al destino
 				NodeData result = new NodeData(stack, ejercito, costo);
-				return new ResultadoNodo(null, result);
+				return new NodeData(result);
 			}
 			else {  // Si pierdo devuelvo un camino indicando que el ejercito muere
-				return new ResultadoNodo(new NodeData(stack, ejercito, -1), null);   
+				return new NodeData(new NodeData(stack, ejercito, -1));   
 			}
 		}
 		
@@ -88,7 +101,7 @@ public class Mapa {
 		int cantDER = 0;                  //cantidad de caminos sin salida
 		vecinos.removeAll(visitadosAux);    //Saco de los vecinos los nodos que ya visite
 		if(vecinos.size()==0) {     //Significa que no tiene mas caminos para recorrer y devuelve un resultado indicando camino sin salida
-			return new ResultadoNodo();
+			return new NodeData();
 		}
 		visitadosAux.add(pueblo);              //Visito el nodo actual por este camino
 		
@@ -107,10 +120,10 @@ public class Mapa {
 			else if(!ComparadorConjuntos.tieneInterseccion(visitadosAux, registro.getCamino())) {//El camino guardado contiene al menos un nodo que ya se recorrio
 				EjercitoAliado clon = ejercito.clone();
 				new ControladorBatalla(clon, registro.getEjercito().clone()).disputarBatalla();
-				if(clon.getVida()<0.01 && registro.getCosto() == -1) {                  //Pierde contra el ejercito guardado que no llega al final
+				if(clon.getVida()<ejercito.getVida()*0.1 && registro.getCosto() == -1) {                  //Pierde contra el ejercito guardado que no llega al final
 					vecinos.remove(Integer.valueOf(registro.getNextNodo()));   
 					cantSaltos++;
-				}else if(clon.getVida()>0.01 && registro.getCosto() != -1) {			//Gana contra el ejercito guardado que llega al final
+				}else if(clon.getVida()>ejercito.getVida()*0.1 && registro.getCosto() != -1) {			//Gana contra el ejercito guardado que llega al final
 					vecinos.remove(Integer.valueOf(registro.getNextNodo())); 
 					caminosGanadores.add(registro);
 					cantSaltos++;
@@ -125,16 +138,14 @@ public class Mapa {
 				Stack <Integer> pila = new Stack<Integer>();
 				pila.push(pueblo);
 				NodeData LI = new NodeData(pila, ejercito, -1);
-				return new ResultadoNodo(LI, null);
+				return LI;
 			}
 		}	
 		
 		for(Integer vecino: vecinos) {
 			double costoAdy = grafo.getCostoAdyacencia(pueblo, vecino);
 			//llamada recursiva sumando el costo del nodo actual a la adyacencia
-			ResultadoNodo resultado = _getCaminosFactible(vecino, map, clon, visitadosAux, costoAdy); 
-			NodeData LI = resultado.getLI();
-			NodeData caminoResultado = resultado.getCamino();
+			NodeData resultado = _getCaminosFactible(vecino, map, clon, visitadosAux, costoAdy); 
 			if(resultado.isDeadEndRoad()) {
 				Stack<Integer> stack = new Stack<Integer>();
 				stack.push(vecino);
@@ -142,33 +153,32 @@ public class Mapa {
 				cantDER++;
 			}
 			else{
-				if(LI!= null) {          //Existe un ejercito guardado que murio 
-					registros.add(new NodeData(LI.getCamino(), ejercito.clone(), LI.getCosto()));
+				if(resultado.getCosto() == -1) {          //Existe un ejercito guardado que murio 
+					registros.add(new NodeData(resultado.getCamino(), ejercito.clone(), resultado.getCosto()));
 				}
-				if(caminoResultado != null) {  //Existe un ejercito guardado que gano
-					caminosGanadores.add(new NodeData(caminoResultado.getCamino(), ejercito.clone(), caminoResultado.getCosto() + costo));
-					if(caminoResultado.isLineal()) {   //Es un camino lineal
-						registros.add(new NodeData(caminoResultado.getCamino(), ejercito.clone(), caminoResultado.getCosto()+ costo));
+				else{  //Existe un ejercito guardado que gano
+					caminosGanadores.add(new NodeData(resultado.getCamino(), ejercito.clone(), resultado.getCosto() + costo));
+					if(resultado.isLineal()) {   //Es un camino lineal
+						registros.add(new NodeData(resultado.getCamino(), ejercito.clone(), resultado.getCosto()+ costo));
 					}
 				}
 			}
 		}
 		map.put(pueblo, registros);  // Guardo en el mapa los registros actualizados
 		
-		if(cantDER == (cantVecinosInicial-1)) return new ResultadoNodo();   //Si la cantidad de deadEndRoad es igual a la cantidad de 
+		if(cantDER == (cantVecinosInicial-1)) return new NodeData();   //Si la cantidad de deadEndRoad es igual a la cantidad de 
 																		//vecinos menos el nodo actual significa que este nodo es un camino sin salida
 		NodeData mejorCamino = obtenerMejorCamino(caminosGanadores);
 
-		NodeData LI = null;
 		if(mejorCamino == null) {
 			Stack<Integer> caminoAux = new Stack<Integer>();
 			caminoAux.push(pueblo);
-			LI = new NodeData(caminoAux, ejercito, -1);
+			mejorCamino = new NodeData(caminoAux, ejercito, -1);
 		}else{
 			mejorCamino.addCamino(pueblo, costo);
 			if(cantVecinosInicial == 2) mejorCamino.setCaminoLineal(); 
 		}
-		return new ResultadoNodo(LI, mejorCamino);
+		return mejorCamino;
 	}
 	
 	private static NodeData obtenerMejorCamino(List<NodeData> caminosGanadores) {

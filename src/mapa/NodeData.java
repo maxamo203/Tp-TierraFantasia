@@ -16,6 +16,10 @@ public class NodeData {
     	this.costo = costo;
     }
     
+    public NodeData() {
+    	this.deadEndRoad = true;
+    }
+    
     public NodeData(Stack<Integer> camino) {
     	this.camino = camino;
     	deadEndRoad = true;
@@ -71,30 +75,29 @@ public class NodeData {
     
     @Override
     public String toString() {
-        StringBuilder out = new StringBuilder();
-
         if (deadEndRoad) {
             return "No existe camino posible";
         }
 
-        // Camino
-        out.append("Camino: ");
+        String out = "Camino: ";
         Stack<Integer> pilaAuxiliar = new Stack<>();
         while (!camino.isEmpty()) {
-            Integer elemento = camino.pop();
-            out.append(elemento).append(" ");
-            pilaAuxiliar.push(elemento);
+            pilaAuxiliar.push(camino.pop());
         }
 
-        // Devolvemos los elementos a la pila original
         while (!pilaAuxiliar.isEmpty()) {
-            camino.push(pilaAuxiliar.pop());
+            Integer elemento = pilaAuxiliar.pop();
+            out += elemento;
+            camino.push(elemento);
+            if(!pilaAuxiliar.isEmpty()) {
+            	out +=" <- ";
+            }
         }
 
-        // Costo
-        out.append("\nTiempo total: ").append(costo);
+        out += "\nTiempo total: " + costo;
 
-        return out.toString();
+        return out;
     }
+
 
 }

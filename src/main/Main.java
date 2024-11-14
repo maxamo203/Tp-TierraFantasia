@@ -11,14 +11,14 @@ public class Main {
 	public static void main(String[] args) {
 
 		Mapa mapa = Mapa.getInstance();
-		LectorArchivo.leerArchivo("input2.txt");
+		LectorArchivo.leerArchivo("input.txt");
 		try {
 			mapa.cargarMapa(LectorArchivo.pueblos, LectorArchivo.matrizAdyacencia, LectorArchivo.posPuebloFinal, LectorArchivo.posPuebloInicial);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		EjercitoAliado miejercito = LectorArchivo.ejercitoPropio;
-		EjercitoAliado aux = miejercito.clone();
+		EjercitoAliado miejercitoclone = miejercito.clone();
 		
 		Stack<Integer> listaPueblosCercanos;
 		try {
@@ -34,18 +34,16 @@ public class Main {
 			puebloDestino.interactuar(miejercito);
 		}
 		listaPueblosCercanos.clear();
+		System.out.println(mapa.mostrarCaminoCorto());
 		if(miejercito.getVida()>0) {
 			System.out.println("Mision Factible");
-			System.out.println(mapa.obtenerCaminoCorto_noPila());
 			miejercito.generarInforme();
-			return;
 		}
 		else {
-			System.out.println(mapa.obtenerCaminoCorto_noPila());
 			System.out.println("Mision No Factible por el camino mas corto\n"
 					+ "Calculando ruta alternativa...");
-			NodeData resultado = mapa.getCaminoCortoFactible(aux);
-			if(resultado == null) {
+			NodeData resultado = mapa.getCaminoCortoFactible(miejercitoclone);
+			if(resultado.getCosto() == -1) {
 				System.out.println("No existe camino posible");
 			}else {
 				System.out.println(resultado);				
