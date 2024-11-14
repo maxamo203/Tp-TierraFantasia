@@ -67,39 +67,6 @@ public class Grafo {
 		return minIndex;
 	}
 
-//	public static void mostrarDistancias(Camino camino) {
-//		System.out.println("Distancias desde el nodo inicial:");
-//		for (int i = 0; i < camino.getCantNodos(); i++) {
-//			System.out.println("Nodo " + i + ": " + camino.getCosto(i));
-//		}
-//	}
-//
-//	public void mostrarGrafo() {
-//		System.out.print("    "); 
-//		for (int i = 0; i < matrizAdyacencia.length; i++) {
-//			System.out.printf("%4d", i); 
-//		}
-//		System.out.println();
-//
-//		for (int i = 0; i < matrizAdyacencia.length; i++) {
-//			System.out.printf("%4d", i);
-//
-//			for (int j = 0; j < matrizAdyacencia.length; j++) {
-//				System.out.printf("%4d", matrizAdyacencia[i][j]);
-//			}
-//			System.out.println(); // 
-//		}
-//	}
-	
-	public void sumarCosto(int costo) {
-		for(int i=0; i<matrizAdyacencia.length; i++) {
-			for(int j=0; j<matrizAdyacencia.length; j++) {
-				if(matrizAdyacencia[i][j] != -1) {
-					matrizAdyacencia[i][j] += costo;
-				}
-			}
-		}
-	}
 	public double getCostoAdyacencia(int i, int j) {
 		if(i >= matrizAdyacencia.length || j>=matrizAdyacencia.length || i<0||j<0)
 			throw new RuntimeException("Posicion Invalida de Grafo: " + i + " " + j);

@@ -11,13 +11,13 @@ import main.LectorArchivo;
 public class Archivos {
 	@Test
 	public void test1() {
-		LectorArchivo.leerArchivo("input.txt");
+		LectorArchivo.leerArchivo("input6.txt");
 		assertEquals(LectorArchivo.cantPueblos, 4);
 		double [][] esperado= {
-				{-1,10,20,-1},
-				{10,-1,5,-1},
-				{20,5,-1,7},
-				{-1,-1,7,-1}
+				{-1,20,30,-1},
+				{20,-1,15,-1},
+				{30,15,-1,17},
+				{-1,-1,17,-1}
 		};
 		for(int i = 0;i< LectorArchivo.matrizAdyacencia.length;i++) {
 			assertArrayEquals(LectorArchivo.matrizAdyacencia[i], esperado[i], 0.001);
@@ -29,18 +29,21 @@ public class Archivos {
 	@Test
 	public void test2() {
 		LectorArchivo.leerArchivo("input2.txt");
-		assertEquals(LectorArchivo.cantPueblos, 4);
+		assertEquals(LectorArchivo.cantPueblos, 7);
 		double [][] esperado= {
-				{-1,10,20,-1},
-				{10,-1,5,-1},
-				{20,5,-1,-1},
-				{-1,-1,-1,-1}
+				{-1, 20, 30, -1, -1, -1, -1},
+	            {20, -1, 20, -1, -1, -1, -1}, 
+	            {30, 20, -1, 40, -1, -1, -1},
+	            {-1, -1, 40, -1, 20, 30, -1},
+	            {-1, -1, -1, 20, -1, -1, 15}, 
+	            {-1, -1, -1, 30, -1, -1, 30}, 
+	            {-1, -1, -1, -1, 15, 30, -1}
 		};
 		for(int i = 0;i< LectorArchivo.matrizAdyacencia.length;i++) {
 			assertArrayEquals(LectorArchivo.matrizAdyacencia[i], esperado[i], 0.001);
 		}
-		assertEquals(LectorArchivo.posPuebloFinal, 3); 
+		assertEquals(LectorArchivo.posPuebloFinal, 6); 
 		assertEquals(LectorArchivo.posPuebloInicial, 0); 
-		assertEquals(LectorArchivo.ejercitoPropio.getVida(),10800,0.001);
+		assertEquals(LectorArchivo.ejercitoPropio.getVida(),2160,0.001);
 	}
 }

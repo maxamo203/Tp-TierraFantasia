@@ -1,8 +1,6 @@
 package mapa;
 
 import java.util.Stack;
-
-import Ejercitos.Ejercito;
 import Ejercitos.EjercitoAliado;
 
 public class NodeData {

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import Ejercitos.Atacante;
 import razas.Nortaichian;
 import razas.Radaiteran;
 import razas.Reralopes;
@@ -122,5 +123,46 @@ public class Razas {
 		assertEquals(18*2,n.atacar());
 		assertEquals(18*2,n.atacar());
 		assertEquals(18,n.atacar());
+	}
+	
+	@Test
+	public void clone_wrives() {
+		Wrives orig = new Wrives();
+		orig.recibirDano(20);
+		orig.descansar();
+		Atacante clon = orig.clone();
+		assertEquals(orig.atacar(), clon.atacar());
+		assertEquals(orig.recibirDano(20), clon.recibirDano(20), 0.01);
+		assertEquals(orig.getVida(), clon.getVida(), 0.01);
+	}
+	@Test
+	public void clone_radaiteran() {
+		Radaiteran orig = new Radaiteran();
+		orig.recibirDano(20);
+		orig.descansar();
+		Atacante clon = orig.clone();
+		assertEquals(orig.atacar(), clon.atacar());
+		assertEquals(orig.recibirDano(20), clon.recibirDano(20), 0.01);
+		assertEquals(orig.getVida(), clon.getVida(), 0.01);
+	}
+	@Test
+	public void clone_reralopes() {
+		Reralopes orig = new Reralopes();
+		orig.recibirDano(20);
+		orig.descansar();
+		Atacante clon = orig.clone();
+		assertEquals(orig.atacar(), clon.atacar());
+		assertEquals(orig.recibirDano(20), clon.recibirDano(20), 0.01);
+		assertEquals(orig.getVida(), clon.getVida(), 0.01);
+	}
+	@Test
+	public void clone_nortaichian() {
+		Nortaichian orig = new Nortaichian();
+		orig.recibirDano(20);
+		orig.descansar();
+		Atacante clon = orig.clone();
+		assertEquals(orig.atacar(), clon.atacar());
+		assertEquals(orig.recibirDano(20), clon.recibirDano(20), 0.01);
+		assertEquals(orig.getVida(), clon.getVida(), 0.01);
 	}
 }

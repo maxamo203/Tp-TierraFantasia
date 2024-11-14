@@ -2,14 +2,27 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import Ejercitos.*;
+import main.LectorArchivo;
+import mapa.Mapa;
 import mapa.PuebloAliado;
 import mapa.PuebloEnemigo;
 
 public class Ejercitos {
 
+	@BeforeClass
+	public static void cargaMapa() {
+		LectorArchivo.leerArchivo("input3.txt");
+		try {
+			Mapa.getInstance().cargarMapa(LectorArchivo.pueblos, LectorArchivo.matrizAdyacencia, LectorArchivo.posPuebloFinal, LectorArchivo.posPuebloInicial);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	@Test
 	public void test1() {
 		EjercitoAliado e1 = new EjercitoAliado("WRIVES", 2,0);
@@ -73,5 +86,23 @@ public class Ejercitos {
 		pA.interactuar(eA);
 		assertEquals(2892,eA.getVida(),0.001);
 	}
+	
+	@Test
+	public void viajar() {
+		EjercitoAliado eA = new EjercitoAliado("WRIVES", 30, 0);
+		eA.viajar(1);
+		assertEquals(1, eA.getUbicacion());
+	}
+	
+	@Test
+	public void clonar() {
+		EjercitoAliado eA = new EjercitoAliado("RADAITERAN", 30, 0);
+		eA.recibirDano(300);
+		EjercitoAliado a = eA.clone();
+		assertEquals(eA.getVida(), a.getVida(),0.01);
+		a.recibirDano(20);
+		assertEquals(eA.getVida()-20, a.getVida(),0.01);
+	}
+	
 
 }
