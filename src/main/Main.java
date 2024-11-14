@@ -42,7 +42,8 @@ public class Main {
 		}
 		else {
 			System.out.println(mapa.obtenerCaminoCorto_noPila());
-			System.out.println("Mision No Factible");
+			System.out.println("Mision No Factible por el camino mas corto\n"
+					+ "Calculando ruta alternativa...");
 			NodeData resultado = mapa.getCaminoCortoFactible(aux);
 			if(resultado == null) {
 				System.out.println("No existe camino posible");

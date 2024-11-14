@@ -60,10 +60,6 @@ public class EjercitoAliado extends Ejercito {
 			tropas.add(tropas.poll()); //elimina e inserta al inicio 
 		}
 	}
-	@Override
-	public String toString() {
-		return "EJERCITO ALIADO";
-	}
 	public void aumentarTiempo(double t) {
 		tiempoDeMision += t;
 	}

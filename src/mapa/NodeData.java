@@ -77,9 +77,6 @@ public class NodeData {
             return "No existe camino posible";
         }
 
-        // Información del ejército
-        out.append("Ejercito: ").append(ejercito.toString()).append("\n");
-
         // Camino
         out.append("Camino: ");
         Stack<Integer> pilaAuxiliar = new Stack<>();
@@ -95,7 +92,7 @@ public class NodeData {
         }
 
         // Costo
-        out.append("\nCosto total: ").append(costo);
+        out.append("\nTiempo total: ").append(costo);
 
         return out.toString();
     }

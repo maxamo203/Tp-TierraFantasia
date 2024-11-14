@@ -53,7 +53,7 @@ public class Camino {
 	    }
 	    out.append(nodoPartida);
 
-	    out.append("\nCosto total: ").append(costos[nodoDestino]);
+	    out.append("\nTiempo total: ").append(costos[nodoDestino]);
 
 	    return out.toString();
 	}

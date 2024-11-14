@@ -69,7 +69,7 @@ public class Ejercito implements Atacante {
 
 	@Override
 	public String toString() {
-		return "EJERCITO HOSTIL";
+		return tropas.size() + "tropas restantes";
 	}
 
 	@Override
