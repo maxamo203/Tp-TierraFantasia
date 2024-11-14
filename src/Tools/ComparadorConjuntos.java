@@ -7,7 +7,7 @@ public class ComparadorConjuntos {
 
 	public static boolean tieneInterseccion(HashSet<Integer> visitadosAux, Stack<Integer> stack) {
        for (Integer elemento : stack) {
-            if (stack.contains(elemento)) {
+            if (visitadosAux.contains(elemento)) {
                 return true;
             }
         }

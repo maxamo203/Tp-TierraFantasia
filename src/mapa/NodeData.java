@@ -10,6 +10,7 @@ public class NodeData {
     private EjercitoAliado ejercito;
     private double costo;
     private boolean deadEndRoad = false;
+    private boolean caminoLineal = false;
     
     public NodeData(Stack<Integer> camino, EjercitoAliado ejercito, double costo) {
     	this.camino = camino;
@@ -23,7 +24,13 @@ public class NodeData {
     	
     }
     
-    public Stack<Integer> getCamino() {
+    public NodeData(NodeData registro) {
+    	camino = registro.getCamino();
+    	ejercito = registro.getEjercito();
+		costo = registro.costo;
+	}
+
+	public Stack<Integer> getCamino() {
     	Stack<Integer> aux = new Stack<Integer>();
     	for (Integer elemento : camino) {
     		aux.push(elemento);
@@ -35,8 +42,9 @@ public class NodeData {
     	return camino.peek();
     }
     
-    public void addCamino(int nodo) {
+    public void addCamino(int nodo, double costo) {
     	camino.push(nodo);
+    	costo+=costo;
     }
     
     public EjercitoAliado getEjercito() {
@@ -45,6 +53,14 @@ public class NodeData {
     
     public double getCosto() {
     	return costo;
+    }
+    
+    public boolean isLineal() {
+    	return caminoLineal;
+    }
+    
+    public void setCaminoLineal() {
+    	caminoLineal = true;
     }
     
     public void pushCamino(int nodo) {

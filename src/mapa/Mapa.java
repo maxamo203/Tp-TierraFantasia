@@ -65,7 +65,7 @@ public class Mapa {
 		return null;
 	}
 	
-	public ResultadoNodo _getCaminosFactible(int pueblo,HashMap<Integer, List<NodeData>> map, 
+	private ResultadoNodo _getCaminosFactible(int pueblo,HashMap<Integer, List<NodeData>> map, 
 										EjercitoAliado ejercito, HashSet<Integer> visitados, double costo) {
 		cantLlamadas++;
 		if(pueblo == posPuebloDestino) { //Condición de corte donde llegue al destino
@@ -128,10 +128,11 @@ public class Mapa {
 				return new ResultadoNodo(LI, null);
 			}
 		}	
+		
 		for(Integer vecino: vecinos) {
 			double costoAdy = grafo.getCostoAdyacencia(pueblo, vecino);
 			//llamada recursiva sumando el costo del nodo actual a la adyacencia
-			ResultadoNodo resultado = _getCaminosFactible(vecino, map, clon, visitadosAux, costoAdy + costo); 
+			ResultadoNodo resultado = _getCaminosFactible(vecino, map, clon, visitadosAux, costoAdy); 
 			NodeData LI = resultado.getLI();
 			NodeData caminoResultado = resultado.getCamino();
 			if(resultado.isDeadEndRoad()) {
@@ -145,14 +146,13 @@ public class Mapa {
 					registros.add(new NodeData(LI.getCamino(), ejercito.clone(), LI.getCosto()));
 				}
 				if(caminoResultado != null) {  //Existe un ejercito guardado que gano
-					caminosGanadores.add(new NodeData(caminoResultado.getCamino(), ejercito.clone(), caminoResultado.getCosto()));
-					if(cantVecinosInicial == 2) {   //Es un camino lineal
-						registros.add(new NodeData(caminoResultado.getCamino(), ejercito.clone(), caminoResultado.getCosto()));
+					caminosGanadores.add(new NodeData(caminoResultado.getCamino(), ejercito.clone(), caminoResultado.getCosto() + costo));
+					if(caminoResultado.isLineal()) {   //Es un camino lineal
+						registros.add(new NodeData(caminoResultado.getCamino(), ejercito.clone(), caminoResultado.getCosto()+ costo));
 					}
 				}
 			}
 		}
-		
 		map.put(pueblo, registros);  // Guardo en el mapa los registros actualizados
 		
 		if(cantDER == (cantVecinosInicial-1)) return new ResultadoNodo();   //Si la cantidad de deadEndRoad es igual a la cantidad de 
@@ -164,13 +164,12 @@ public class Mapa {
 			Stack<Integer> caminoAux = new Stack<Integer>();
 			caminoAux.push(pueblo);
 			LI = new NodeData(caminoAux, ejercito, -1);
-		}else {
-			mejorCamino.addCamino(pueblo);
+		}else{
+			mejorCamino.addCamino(pueblo, costo);
+			if(cantVecinosInicial == 2) mejorCamino.setCaminoLineal(); 
 		}
-		
 		return new ResultadoNodo(LI, mejorCamino);
 	}
-	
 	
 	private static NodeData obtenerMejorCamino(List<NodeData> caminosGanadores) {
 		NodeData mejorCamino = null;

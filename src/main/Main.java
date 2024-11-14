@@ -35,7 +35,7 @@ public class Main {
 		 ....por ahora, decimos que no hay camino posible
 		 */
 		Mapa mapa = Mapa.getInstance();
-		LectorArchivo.leerArchivo("testRandom.txt");
+		LectorArchivo.leerArchivo("input2.txt");
 		try {
 			mapa.cargarMapa(LectorArchivo.pueblos, LectorArchivo.matrizAdyacencia, LectorArchivo.posPuebloFinal, LectorArchivo.posPuebloInicial);
 		} catch (Exception e) {
