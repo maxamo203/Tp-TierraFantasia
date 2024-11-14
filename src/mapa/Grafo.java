@@ -109,7 +109,7 @@ public class Grafo {
 	public List<Integer> getAdyacencias(int pueblo) {
 		List<Integer> adyacencias = new ArrayList<>();
 		for(int i=0; i<cantNodos; i++) {
-			if(matrizAdyacencia[pueblo][i] != Integer.MAX_VALUE) {
+			if(matrizAdyacencia[pueblo][i] != -1) {
 				adyacencias.add(i);
 			}
 		}

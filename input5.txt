@@ -1,11 +1,11 @@
 7
 1 20 Wrives propio
-2 20 Radaiteran enemigo
+2 50 Radaiteran aliado
 3 40 Reralopes enemigo
-4 10 Reralopes aliado
+4 20 Wrives aliado
 5 5 Wrives enemigo
 6 20 Reralopes aliado
-7 10 Wrives enemigo
+7 20 Wrives enemigo
 1 -> 7
 1 2 10
 1 3 20

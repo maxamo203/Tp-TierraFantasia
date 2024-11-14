@@ -11,6 +11,7 @@ import Ejercitos.EjercitoAliado;
 import mapa.Pueblo;
 import mapa.PuebloAliado;
 import mapa.PuebloEnemigo;
+import mapa.PuebloPropio;
 
 public class LectorArchivo {
 	public static EjercitoAliado ejercitoPropio;
@@ -44,7 +45,7 @@ public class LectorArchivo {
                     if(tipo.equals("propio")) {
                     	posPuebloInicial = pueblo-1;
                     	ejercitoPropio = new EjercitoAliado(raza.toUpperCase(), cantEjercito,posPuebloInicial);
-                    	pueblos[pueblo-1] = null;
+                    	pueblos[pueblo-1] = new PuebloPropio(raza.toUpperCase(), cantEjercito);
                     }
                     else if(tipo.equals("aliado")) {
                     	pueblos[pueblo-1] = new PuebloAliado(raza.toUpperCase(), cantEjercito); 
@@ -61,7 +62,7 @@ public class LectorArchivo {
                 	partes = linea.split(" ");
                     int origen = Integer.parseInt(partes[0]);
                     int destino = Integer.parseInt(partes[1]);
-                    double costo = Double.parseDouble(partes[2]);
+                    double costo = Double.parseDouble(partes[2]) + 10;
                     matrizAdyacencia[origen-1][destino-1] = costo;
                     matrizAdyacencia[destino-1][origen-1] = costo; //la matriz es simetrica
                 }

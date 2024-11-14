@@ -29,9 +29,10 @@ public class EjercitoAliado extends Ejercito {
 	}
 	
 	public EjercitoAliado clone() {
-	    EjercitoAliado clon = new EjercitoAliado(razaInicial, cantidadInicial, ubicacion);
+	    EjercitoAliado clon = new EjercitoAliado(razaInicial, 0, ubicacion);
 	    for (Atacante atacante : this.tropas) {
-	        clon.tropas.add(atacante.clone()); // Asumiendo que Atacante tiene un método clone() que realiza una copia profunda
+	        clon.tropas.add(atacante.clone());
+	        clon.vida += atacante.getVida();
 	    }
 	    return clon;
 	}
