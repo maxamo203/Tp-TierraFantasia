@@ -58,7 +58,7 @@ public class Razas {
 		Reralopes r = new Reralopes();
 		assertEquals(0,r.atacar());
 		r.descansar();
-		assertEquals(27*2,r.atacar());
+		assertEquals(54,r.atacar());
 		r.recibirDano(60);
 		assertEquals(53-60,r.getVida(), 0.001);
 		assertEquals(0,r.atacar());
